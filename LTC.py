@@ -18,7 +18,7 @@ y = df['main_category']
 # Trains with half the data, and uses the rest to validate and test
 # Used for demonstration purposes, otherwise, you can allow the model to train with the whole csv file.
 x_train, x_test, y_train, y_test = train_test_split(
-    
+
     x, y, test_size=0.5, random_state=42)
 
 tfidf_vectorizer = TfidfVectorizer(max_features=5000)
@@ -34,7 +34,7 @@ print(classification_report(y_test, y_pred))
 
 # Logic for allowing the user to categorize their own products / titles
 while True:
-user_input = input('Enter a product title (or type "exit" to quit): ')
+    user_input = input('Enter a product title (or type "exit" to quit): ')
 
     if user_input.lower() == 'exit':
         break
