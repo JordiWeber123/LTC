@@ -42,14 +42,14 @@ category_labels = df['Category'].apply(categories.index).values
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(titles)
 X = tokenizer.texts_to_sequences(titles)
-X = pad_sequences(X, maxlen=50)  # Pad sequences to a fixed length
+X = pad_sequences(X, maxlen=10)  # Pad sequences to a fixed length
 
 # Convert categories to one-hot encoding
 y = keras.utils.to_categorical(category_labels, num_classes=len(categories))
 
 # Build and compile the neural network model
 model = keras.Sequential([
-    keras.layers.Embedding(input_dim=len(tokenizer.word_index) + 1, output_dim=8, input_length=50),
+    keras.layers.Embedding(input_dim=len(tokenizer.word_index) + 1, output_dim=8, input_length=10),
     keras.layers.Flatten(),
     keras.layers.Dense(16, activation='relu'),
     keras.layers.Dense(len(categories), activation='softmax')
@@ -58,7 +58,7 @@ model = keras.Sequential([
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 # Train the model
-model.fit(X, y, epochs=20, verbose=1)
+model.fit(X, y, epochs=50, verbose=1)
 
 df = rest_part_50
 
@@ -76,6 +76,9 @@ df.to_excel(output_file, index=False)
 
 print(f"Predictions saved to {output_file}")
 
-# todo: check if the columns are identical
-
-#print(f"Total Correct:", correctRatio)
+match = len(df[df["Category"] == df["Predicted_Category"]])
+count = len(df["Category"])
+correctRatio = (match / count)
+     
+print("Total Correct:", match)
+print("Correct Percentage:", correctRatio)
