@@ -6,4 +6,5 @@ The purpose of creating this tool is for users and companies to be able to quick
 Original data obtained from: https://www.kaggle.com/datasets/lokeshparab/amazon-products-dataset
 
 In order for the model to be trained the file combined_data.csv must be in the same directory as LTC.py
+
 combined_data.csv can be downloaded from: https://drive.google.com/file/d/1MXDKUcQSBP2XLRVH6AHh_68Q02ybTRAY/view?usp=sharing
